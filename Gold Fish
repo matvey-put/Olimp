@@ -1,0 +1,46 @@
+import operator
+x ="input_s1_"+ input("Введите название файла ")
+words = list()
+end = {}
+nach = {}
+nach_1 = {}
+end_1 ={}
+eb = 0
+with open (x+'.txt') as f:
+    n = int(f.readline())
+    eb += n
+    for i in range(n):
+        word = f.readline()[:-1]
+        words.append(word)
+    n = int(f.readline())
+    eb += n
+
+    for i in range(n):
+        char = f.readline().split()
+        nach[char[0]]=int(char[1])
+    n = int(f.readline())
+    eb += n
+
+    for i in range(n):
+        char = f.readline().split()
+        end[char[0]]=int(char[1])
+sorted_na = (sorted(nach.items(), key=operator.itemgetter(1)))
+sorted_en = reversed(sorted(end.items(), key=operator.itemgetter(1)))
+sort_na = {}
+for k, v in sorted_na:
+    sort_na[str(k)] = int(v)
+sort_en = {}
+for k, v in sorted_en:
+    sort_en[str(k)] = int(v)
+ks_n = sort_na.keys()
+ks_e = sort_en.keys()
+
+cnt = 0
+for a in ks_n:
+   for b in ks_e:
+      for word in words:
+          if (word[0]==a) and (word[-1]==b) and (sort_na[word[0]] != 0) and (sort_en[word[-1]] != 0):
+              cnt += 1
+              sort_na[word[0]] -= 1
+              sort_en[word[-1]] -= 1
+print(cnt)
