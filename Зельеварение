@@ -1,0 +1,64 @@
+x ="input"+ input("Введите название файла ")
+words = list()
+with open (x+'.txt') as f:
+        while True:
+                line = [x for x in f.readline().split()]
+                if line == []:
+                        break
+                words.append(line)
+lins_end = ''
+numbers = "1234567890"
+list_cnt = list()
+for i in words:
+    print(i)
+for i in words:
+        if i[0]=="MIX":
+            lins_end = "MX" + lins_end
+            line = "MX"
+            for j in range(1, len(i)):
+                if i[j][0] in numbers:
+                    print(i[j][0])
+                    line += list_cnt[int(i[j]) - 1]
+                    lins_end = lins_end + list_cnt[int(i[j])-1]
+                else:
+                    line += i[j]
+                    lins_end+=i[j]
+            list_cnt.append(line+"XM")
+            lins_end = lins_end + "XM"
+        if i[0]=="WATER":
+            lins_end = "WT" + lins_end
+            line = "WT"
+            for j in range(1, len(i)):
+                if i[j][0] in numbers:
+                    line += list_cnt[int(i[j])-1]
+                    lins_end = lins_end + list_cnt[int(i[j])-1]
+                else:
+                    line += i[j]
+                    lins_end += i[j]
+            list_cnt.append(line+"TW")
+            lins_end = lins_end + "TW"
+        if i[0]=="DUST":
+            lins_end = "DT" + lins_end
+            line = "DT"
+            for j in range(1, len(i)):
+                if i[j][0] in numbers:
+                    line += list_cnt[int(i[j]) - 1]
+                    lins_end = lins_end + list_cnt[int(i[j])-1]
+                else:
+                    line += i[j]
+                    lins_end += i[j]
+            list_cnt.append(line + "TD")
+            lins_end = lins_end + "TD"
+        if i[0]=="FIRE":
+            lins_end = "FR" + lins_end
+            line = "FR"
+            for j in range(1, len(i)):
+                if i[j][0] in numbers:
+                    line += list_cnt[int(i[j]) - 1]
+                    lins_end = lins_end + list_cnt[int(i[j])-1]
+                else:
+                    line += i[j]
+                    lins_end += i[j]
+            list_cnt.append(line + "RF")
+            lins_end = lins_end + "RF"
+print(lins_end)
