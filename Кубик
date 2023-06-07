@@ -1,31 +1,27 @@
-using System;
-using System.IO;
-namespace Кубик_Рубика
+namespace Olinp
 {
     class Program
     {
-        public static int[,] Povorot(int[,] st, int n)
+        public static int[,] turning(int[,] st, int n)
         {
             int[,] stp = new int[n, n];
-            for(var i=0; i<n; i++)
+            for (var i = 0; i < n; i++)
             {
-                for(var j=0; j<n; j++)
+                for (var j = 0; j < n; j++)
                 {
-                    stp[j, n-1-i] = st[i, j];
+                    stp[j, n - 1 - i] = st[i, j];
                 }
             }
             return stp;
         }
         static void Main(string[] args)
         {
-            StreamReader sr = new StreamReader("input_s1_10.txt");
-            StreamReader sr2 = new StreamReader("output_s1_10.txt");
-            string so = sr2.ReadLine();
-            string s = sr.ReadLine();
+            StreamReader vhod = new StreamReader("input_s1_10.txt");
+            string s = vhod.ReadLine();
             string[] s1 = s.Split(" ");
             int N = Convert.ToInt32(s1[0]);
             int M = Convert.ToInt32(s1[1]);
-            s = sr.ReadLine();
+            s = vhod.ReadLine();
             s1 = s.Split(" ");
             int X = Convert.ToInt32(s1[0]);
             int Y = Convert.ToInt32(s1[1]);
@@ -33,7 +29,7 @@ namespace Кубик_Рубика
             int K = 0, p = 0;
             for (var i = 0; i < M; i++)
             {
-                s = sr.ReadLine();
+                s = vhod.ReadLine();
                 s1 = s.Split(" ");
                 K = Convert.ToInt32(s1[1]);
                 p = Convert.ToInt32(s1[2]);
@@ -43,11 +39,11 @@ namespace Кубик_Рубика
                     st[Y - 1, Z - 1] = 1;
                     if (p == 1)
                     {
-                        st = Povorot(st, N);
+                        st = turning(st, N);
                     }
                     else if (p == -1)
                     {
-                        st = Povorot(Povorot(Povorot(st, N), N), N);
+                        st = turning(turning(turning(st, N), N), N);
                     }
                     for (var k = 0; k < N; k++)
                     {
@@ -67,11 +63,11 @@ namespace Кубик_Рубика
                     st[X - 1, Z - 1] = 1;
                     if (p == 1)
                     {
-                        st = Povorot(st, N);
+                        st = turning(st, N);
                     }
                     else if (p == -1)
                     {
-                        st = Povorot(Povorot(Povorot(st, N), N), N);
+                        st = turning(turning(turning(st, N), N), N);
                     }
                     for (var k = 0; k < N; k++)
                     {
@@ -92,11 +88,11 @@ namespace Кубик_Рубика
                     st[X - 1, Y - 1] = 1;
                     if (p == 1)
                     {
-                        st = Povorot(st, N);
+                        st = turning(st, N);
                     }
                     else if (p == -1)
                     {
-                        st = Povorot(Povorot(Povorot(st, N), N), N);
+                        st = turning(turning(turning(st, N), N), N);
                     }
                     for (var k = 0; k < N; k++)
                     {
@@ -111,9 +107,9 @@ namespace Кубик_Рубика
                     }
 
                 }
-                
+
             }
-            Console.WriteLine( X + " " + Y + " " + Z);
+            Console.WriteLine(X + " " + Y + " " + Z);
         }
     }
 }
