@@ -1,1 +1,42 @@
+using System;
+using System.Linq;
 
+class Program
+{
+    static void Main()
+    {
+        int[] dengi = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        int n1 = dengi[0];
+        dengi = dengi.Skip(1).ToArray();
+        int[] spisok_1 = Console.ReadLine().Split().Skip(1).Select(int.Parse).ToArray();
+        int[] vhod = Console.ReadLine().Split().Select(int.Parse).ToArray();
+        int n2 = vhod[0];
+        vhod = vhod.Skip(1).ToArray();
+        int[] spisok_2 = Console.ReadLine().Split().Skip(1).Select(int.Parse).ToArray();
+        int[] money = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+        for (int i = 0; i < money.Length; i++)
+        {
+            int k = spisok_1.Count(j => money[i] >= j);
+            money[i] -= k;
+        }
+
+        for (int i = 0; i < money.Length - 1; i++)
+            money[i + 1] += money[i] * dengi[i];
+
+        money = new int[] { money.Last() };
+        for (int i = 0; i < n2 - 1; i++)
+        {
+            money = money.Concat(new int[] { money[i] / vhod[vhod.Length - i - 1] }).ToArray();
+            money[i] %= vhod[vhod.Length - 1 - i];
+        }
+
+        money = money.Reverse().ToArray();
+        for (int i = 0; i < money.Length; i++)
+        {
+            money[i] += spisok_2.Count(j => money[i] >= j);
+            money[i] = int.Parse(money[i].ToString());
+        }
+        Console.WriteLine(string.Join(" ", money));
+    }
+}
